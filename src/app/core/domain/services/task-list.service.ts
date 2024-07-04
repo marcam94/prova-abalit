@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TaskList } from '../models/task-list.model';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { ITaskListService } from './task-list-service';
+import { ITaskListService } from '../interfaces/task-list-service';
 
 @Injectable({
   providedIn: 'root',
@@ -36,7 +36,8 @@ export class TaskListService implements ITaskListService {
 
   private taskListsSubject = new BehaviorSubject<TaskList[]>(this.taskLists);
 
-  constructor() {}
+  constructor() {
+  }
 
   getTaskLists(): Observable<TaskList[]> {
     return of(this.taskLists);

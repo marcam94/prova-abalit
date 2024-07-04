@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Subtask } from '../models/sub-task.model';
 import { Subject } from 'rxjs';
-import { ISubtaskService } from './sub-task-service';
+import { ISubtaskService } from '../interfaces/sub-task-service';
 
 @Injectable({
   providedIn: 'root',
