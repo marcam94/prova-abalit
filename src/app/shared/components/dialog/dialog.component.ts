@@ -8,11 +8,13 @@ import {
 } from "@angular/material/dialog";
 import {MatButton} from "@angular/material/button";
 import {DialogOpt} from "./dialog.service";
-import {FormGroup, ReactiveFormsModule} from "@angular/forms";
+import {FormGroup, FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatError, MatFormField, MatHint, MatLabel} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
-import {TitleCasePipe} from "@angular/common";
+import {DatePipe, NgIf, TitleCasePipe} from "@angular/common";
+import {DynamicFormComponent} from "../wrapper/dynamic-form/dynamic-form.component";
+import {TaskDetailComponent} from "../../../features/task-list/subtask-list/task-detail/task-detail.component";
 
 @Component({
   selector: 'app-dialog',
@@ -29,7 +31,12 @@ import {TitleCasePipe} from "@angular/common";
     MatLabel,
     MatHint,
     TitleCasePipe,
-    MatError
+    MatError,
+    NgIf,
+    FormsModule,
+    DatePipe,
+    DynamicFormComponent,
+    TaskDetailComponent
   ],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css'
@@ -46,12 +53,9 @@ export class DialogComponent implements OnInit {
 
   ngOnInit(): void {
     this.title = this.data.title
-    if (this.data.inputData) this.formGroup = this.data.inputData
+    if (this.data.inputForm) this.formGroup = this.data.inputForm
   }
 
-  getControlNames() {
-    return Object.keys(this.formGroup.controls)
-  }
 
   sendValues() {
     if (this.formGroup.valid) {

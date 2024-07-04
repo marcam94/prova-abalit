@@ -1,14 +1,19 @@
-.subtask-container {
+.subtask-item {
   background-color: #363636;
 
   border-radius: 5px;
 }
 
-.subtask-container:hover {
+.subtask-item:hover {
   background-color: #484848;
 }
 
-.subtask-container input {
+.subtask-item input {
   color: white;
   background: none;
 }
+
+.subtask-list-container::-webkit-scrollbar {
+  display: none;
+}
+

@@ -1,1 +1,7 @@
-<p>task-detail works!</p>
+<div class="flex flex-col gap-2 justify-center py-8">
+  <label class="w-full"><strong>Titulo:</strong> {{ subtask.title | titlecase }}</label>
+  <label class="w-full"><strong>Descripción:</strong> {{ subtask.description }}</label>
+  <label class="w-full"><strong>Creado:</strong> {{ subtask.createAt | date }}</label>
+  <label class="w-full"><strong>Última actualización:</strong> {{ subtask.updateAt | date }}</label>
+  <label class="w-full"><strong>Finalizado:</strong> {{ subtask.doneAt | date }}</label>
+</div>

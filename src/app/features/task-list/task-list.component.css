@@ -1,0 +1,9 @@
+.task-list-items-container {
+  max-height: 85%;
+}
+
+.task-list-items-container::-webkit-scrollbar {
+  display: none;
+}
+
+

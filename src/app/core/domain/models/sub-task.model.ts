@@ -1,8 +1,10 @@
 export interface Subtask {
   id: number;
   title: string;
-  dueDate: Date | null;
+  createAt: Date | null;
   description: string;
   completed: boolean;
   taskId: number;
+  doneAt?: Date | null;
+  updateAt?: Date | null
 }

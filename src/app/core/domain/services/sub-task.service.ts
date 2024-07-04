@@ -1,30 +1,33 @@
 import {Injectable} from '@angular/core';
 import {Subtask} from '../models/sub-task.model';
 import {Subject} from "rxjs";
+import {ISubtaskService} from "./sub-task-service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class subTask {
+export class SubtaskService implements ISubtaskService {
   private currentTaskIdSelected!: number
-  private subtasks: Subtask[] = [{
-    taskId: 1, id: 1, completed: false, dueDate: new Date(), title: 'Comprar', description: 'test'
-  }, {
-    taskId: 1, id: 2, completed: true, dueDate: new Date(), title: 'Vender', description: 'test'
-  }, {
-    taskId: 1, id: 3, completed: false, dueDate: new Date(), title: 'Lavar', description: 'test'
-  }, {
-    taskId: 2, id: 4, completed: false, dueDate: new Date(), title: 'aa', description: 'test'
-  }, {
-    taskId: 3, id: 5, completed: false, dueDate: new Date(), title: 'Sss', description: 'test'
-  },];
+  private subtasks: Subtask[] = [
+    {
+      taskId: 1, id: 1, completed: false, createAt: new Date(), title: 'Comprar', description: 'pan cereales'
+    }, {
+      taskId: 1, id: 2, completed: false, createAt: new Date(), title: 'Vender', description: 'tele por wallapop'
+    }, {
+      taskId: 1, id: 3, completed: false, createAt: new Date(), title: 'Lavar', description: 'ropa del trabajo'
+    }, {
+      taskId: 2, id: 4, completed: false, createAt: new Date(), title: 'Deberes', description: 'fisica'
+    }, {
+      taskId: 3, id: 5, completed: true, createAt: new Date(), title: 'limpiar la casa', description: 'sin falta!'
+    },
+  ];
   private subtasksSubject = new Subject<Subtask[] | []>();
   subtasks$ = this.subtasksSubject.asObservable();
 
   constructor() {
   }
 
-  getSubtasks(taskId: number): void {
+  getSubtasksRelatedWithTask(taskId: number): void {
     const subtasksFound = this.subtasks.filter(subtask => subtask.taskId === taskId);
     this.currentTaskIdSelected = taskId
     this.subtasksSubject.next(subtasksFound.length ? subtasksFound : []);
@@ -42,17 +45,18 @@ export class subTask {
       description: newSubtask.description,
       id: Math.floor(Math.random() * 1000),
       completed: false,
-      dueDate: new Date()
+      createAt: new Date()
     };
     this.subtasks.push(newSubtaskToAdd);
     this.subtasksSubject.next(this.subtasks.filter(subtask => subtask.taskId === this.currentTaskIdSelected));
   }
 
   updateSubtask(subtask: Subtask): void {
-    const index = this.subtasks.findIndex(st => st.id === subtask.id);
+    const index = this.subtasks.findIndex(x => x.id === subtask.id);
     if (index !== -1) {
       this.subtasks[index] = subtask;
-      this.subtasksSubject.next(this.subtasks.filter(st => st.taskId === subtask.taskId));
+      this.subtasksSubject.next(this.subtasks.filter(x => x.taskId === subtask.taskId));
+      console.log(this.subtasks)
     }
   }
 

@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {subTask} from "../../../core/domain/services/sub-task.service";
+import {SubtaskService} from "../../../core/domain/services/sub-task.service";
 import {AsyncPipe, JsonPipe, NgIf, TitleCasePipe, UpperCasePipe} from "@angular/common";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
@@ -19,8 +19,7 @@ import {Subtask} from "../../../core/domain/models/sub-task.model";
   styleUrl: './subtask-list.component.css'
 })
 export class SubtaskListComponent {
-  public addingTask = false
-  private readonly subTaskService = inject(subTask)
+  private readonly subTaskService = inject(SubtaskService)
   public subTasks$ = this.subTaskService.subtasks$
   private readonly dialogService = inject(DialogService)
   private newSubTaskForm = new FormGroup({
@@ -32,21 +31,35 @@ export class SubtaskListComponent {
     this.subTaskService.deleteSubtask(id)
   }
 
+  viewDetail(id: number) {
+    const findRelatedSubTask = this.subTaskService.getSubtaskById(id)
+    if (!findRelatedSubTask) {
+      throw new Error('subtaks related not found')
+    } else {
+      let dialogRef = this.dialogService.openDialog({
+        title: 'Detalle tarea', inputData: findRelatedSubTask, readonly: true
+      }, {
+        height: '400px', width: '600px',
+      })
+      dialogRef.afterClosed().pipe(take(1)).subscribe()
+    }
+  }
+
   editSubTask(id: number) {
     const findRelatedSubTask = this.subTaskService.getSubtaskById(id)
     if (!findRelatedSubTask) {
       throw new Error('subtaks related not found')
     } else {
-      this.newSubTaskForm.setValue({nombre: findRelatedSubTask?.title, descripcion: findRelatedSubTask?.description})
+      this.newSubTaskForm.patchValue({nombre: findRelatedSubTask?.title, descripcion: findRelatedSubTask?.description})
       let dialogRef = this.dialogService.openDialog({
-        title: 'Editar tarea', inputData: this.newSubTaskForm,
+        title: 'Editar tarea', inputForm: this.newSubTaskForm,
       }, {
         height: '400px', width: '600px',
       })
       dialogRef.afterClosed().pipe(take(1)).subscribe({
         next: (res: { nombre: string, descripcion: string }) => {
           const updatedSubTask = {
-            ...findRelatedSubTask, title: res.nombre, description: res.descripcion,
+            ...findRelatedSubTask, title: res.nombre, description: res.descripcion, updateAt: new Date
           } as Subtask
           this.subTaskService.updateSubtask(updatedSubTask)
         }, complete: () => {
@@ -54,12 +67,19 @@ export class SubtaskListComponent {
         }
       })
     }
+  }
+
+  checkSubTask(id: number) {
+    const findRelatedSubTask = this.subTaskService.getSubtaskById(id)
+    if (findRelatedSubTask) {
+      this.subTaskService.updateSubtask({...findRelatedSubTask, completed: true, doneAt: new Date()})
+    }
 
   }
 
   createSubTask() {
     let dialogRef = this.dialogService.openDialog({
-      title: 'Crear nueva tarea', inputData: this.newSubTaskForm,
+      title: 'Crear nueva tarea', inputForm: this.newSubTaskForm,
     }, {
       height: '400px', width: '600px',
     })

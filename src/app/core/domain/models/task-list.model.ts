@@ -4,5 +4,5 @@ export interface TaskList {
   id: number;
   name: string;
   icon?: string
-  tasks: Subtask[];
+  subtasks: Subtask[];
 }

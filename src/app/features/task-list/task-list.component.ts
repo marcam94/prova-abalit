@@ -3,7 +3,7 @@ import {TaskListService} from "../../core/domain/services/task-list.service";
 import {AsyncPipe, JsonPipe} from "@angular/common";
 import {MatCard, MatCardContent} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {subTask} from "../../core/domain/services/sub-task.service";
+import {SubtaskService} from "../../core/domain/services/sub-task.service";
 import {TaskList} from "../../core/domain/models/task-list.model";
 import {DialogService} from "../../shared/components/dialog/dialog.service";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -25,7 +25,7 @@ import {take} from "rxjs";
 export class TaskListComponent {
   private readonly taskListService = inject(TaskListService)
   public tasks$ = this.taskListService.getTaskLists()
-  private readonly taskService = inject(subTask)
+  private readonly taskService = inject(SubtaskService)
   private readonly dialogService = inject(DialogService)
   private newTaskForm = new FormGroup({
     nombre: new FormControl<string>(
@@ -34,13 +34,13 @@ export class TaskListComponent {
   })
 
   openTasks(task: TaskList) {
-    this.taskService.getSubtasks(task.id)
+    this.taskService.getSubtasksRelatedWithTask(task.id)
   }
 
   addNewList() {
     let dialogRef = this.dialogService.openDialog({
         title: 'Crear nueva Lista de tareas',
-        inputData: this.newTaskForm,
+        inputForm: this.newTaskForm,
       },
       {
         height: '400px',
@@ -52,7 +52,7 @@ export class TaskListComponent {
         const newList: TaskList = {
           id: 20,
           name: resp.nombre,
-          tasks: [],
+          subtasks: [],
           icon: 'menu'
         };
         this.taskListService.addTaskList(newList);
