@@ -1,0 +1,14 @@
+.subtask-container {
+  background-color: #363636;
+
+  border-radius: 5px;
+}
+
+.subtask-container:hover {
+  background-color: #484848;
+}
+
+.subtask-container input {
+  color: white;
+  background: none;
+}

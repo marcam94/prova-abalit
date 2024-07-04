@@ -1,9 +1,7 @@
 .navbar-container {
-  background-color: yellow !important;
+  background-color: #202020;
   max-height: 64px !important;
-  border-bottom: 1px solid !important;
-  padding-left: 9rem !important;
-  padding-right: 9rem !important;
+  padding-left: 2rem !important;
 }
 
 @media (max-width: 1400px) {

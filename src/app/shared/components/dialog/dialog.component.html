@@ -1,0 +1,21 @@
+<h2 class="m-auto" mat-dialog-title>{{ title }}</h2>
+<mat-dialog-content>
+  @if (formGroup) {
+    <div [formGroup]="formGroup" class="flex flex-col gap-2 justify-center py-8">
+      @for (controlName of getControlNames(); track controlName) {
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>{{ controlName | titlecase }}</mat-label>
+          <input matInput [formControlName]="controlName">
+          @if (formGroup.get(controlName)?.hasError('required')) {
+            <mat-error>Campo obligatorio</mat-error>
+          }
+        </mat-form-field>
+      }
+    </div>
+  }
+
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button (click)="dialog.close()" mat-button>Cerrar</button>
+  <button (click)="sendValues()" [color]="'primary'" [disabled]="formGroup.invalid" mat-flat-button>Enviar</button>
+</mat-dialog-actions>

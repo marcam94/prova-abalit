@@ -1,12 +1,11 @@
 import {Injectable} from '@angular/core';
 import {TaskList} from "../models/task-list.model";
-import {ITaskListService} from "./task-list-service";
-import {Observable, of} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class TaskListService implements ITaskListService {
+export class TaskListService {
   private taskLists: TaskList[] = [
     {
       id: 1,
@@ -34,6 +33,9 @@ export class TaskListService implements ITaskListService {
     }
   ];
 
+  private taskListsSubject = new BehaviorSubject<TaskList[]>(this.taskLists);
+  taskLists$ = this.taskListsSubject.asObservable();
+
   constructor() {
   }
 
@@ -41,22 +43,26 @@ export class TaskListService implements ITaskListService {
     return of(this.taskLists);
   }
 
-  getTaskListById(id: number): TaskList | undefined {
-    return this.taskLists.find(taskList => taskList.id === id);
+  getTaskListById(id: number): Observable<TaskList | undefined> {
+    const taskList = this.taskLists.find(taskList => taskList.id === id);
+    return of(taskList);
   }
 
   addTaskList(taskList: TaskList): void {
     this.taskLists.push(taskList);
+    this.taskListsSubject.next(this.taskLists);
   }
 
   updateTaskList(taskList: TaskList): void {
     const index = this.taskLists.findIndex(tl => tl.id === taskList.id);
     if (index !== -1) {
       this.taskLists[index] = taskList;
+      this.taskListsSubject.next(this.taskLists);
     }
   }
 
   deleteTaskList(id: number): void {
     this.taskLists = this.taskLists.filter(taskList => taskList.id !== id);
+    this.taskListsSubject.next(this.taskLists);
   }
 }

@@ -1,11 +1,11 @@
-import {Subtask} from "../models/task.model";
+import {Subtask} from "../models/sub-task.model";
 
 export interface ITaskService {
   getTasks(listId: number): void;
 
   getTaskById(id: number): Subtask | undefined;
 
-  addTask(task: Subtask): void;
+  addTask(task: string): void;
 
   updateTask(task: Subtask): void;
 
