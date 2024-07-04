@@ -1,18 +1,44 @@
 import {Injectable} from '@angular/core';
 import {TaskList} from "../models/task-list.model";
 import {ITaskListService} from "./task-list-service";
+import {Observable, of} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskListService implements ITaskListService {
-  private taskLists: TaskList[] = [];
+  private taskLists: TaskList[] = [
+    {
+      id: 1,
+      name: 'Mi día',
+      tasks: [],
+      icon: 'wb_sunny'
+    },
+    {
+      id: 2,
+      name: 'Importante',
+      tasks: [],
+      icon: 'stars'
+    },
+    {
+      id: 3,
+      name: 'Planeado',
+      tasks: [],
+      icon: 'calendar_today'
+    },
+    {
+      id: 4,
+      name: 'Tareas',
+      tasks: [],
+      icon: 'home'
+    }
+  ];
 
   constructor() {
   }
 
-  getTaskLists(): TaskList[] {
-    return this.taskLists;
+  getTaskLists(): Observable<TaskList[]> {
+    return of(this.taskLists);
   }
 
   getTaskListById(id: number): TaskList | undefined {

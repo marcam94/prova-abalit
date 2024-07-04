@@ -1,7 +1,8 @@
-import {Task} from "./task.model";
+import {Subtask} from "./task.model";
 
 export interface TaskList {
   id: number;
   name: string;
-  tasks: Task[];
+  icon?: string
+  tasks: Subtask[];
 }

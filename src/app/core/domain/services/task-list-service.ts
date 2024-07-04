@@ -1,7 +1,8 @@
 import {TaskList} from "../models/task-list.model";
+import {Observable} from "rxjs";
 
 export interface ITaskListService {
-  getTaskLists(): TaskList[];
+  getTaskLists(): Observable<TaskList[]>;
 
   getTaskListById(id: number): TaskList | undefined;
 

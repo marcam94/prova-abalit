@@ -11,7 +11,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'home',
-        loadComponent: () => import('./features/task-list/task-list.component').then(x => x.TaskListComponent)
+        loadComponent: () => import('./features/task-list/subtask-list/subtask-list.component')
+          .then(x => x.SubtaskListComponent)
       }
     ]
   }

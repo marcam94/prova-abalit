@@ -1,13 +1,13 @@
-import {Task} from "../models/task.model";
+import {Subtask} from "../models/task.model";
 
 export interface ITaskService {
-  getTasks(listId: number): Task[];
+  getTasks(listId: number): void;
 
-  getTaskById(id: number): Task | undefined;
+  getTaskById(id: number): Subtask | undefined;
 
-  addTask(task: Task): void;
+  addTask(task: Subtask): void;
 
-  updateTask(task: Task): void;
+  updateTask(task: Subtask): void;
 
   deleteTask(id: number): void;
 }
