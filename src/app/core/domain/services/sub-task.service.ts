@@ -7,7 +7,7 @@ import { ISubtaskService } from './sub-task-service';
   providedIn: 'root',
 })
 export class SubtaskService implements ISubtaskService {
-  private currentTaskIdSelected!: number;
+  public currentTaskIdSelected!: number;
   private subtasks: Subtask[] = [
     {
       taskId: 1,
@@ -53,14 +53,15 @@ export class SubtaskService implements ISubtaskService {
   private subtasksSubject = new Subject<Subtask[] | []>();
   subtasks$ = this.subtasksSubject.asObservable();
 
-  constructor() {}
+  constructor() {
+  }
 
   getSubtasksRelatedWithTask(taskId: number): void {
     const subtasksFound = this.subtasks.filter(
-      subtask => subtask.taskId === taskId
+      subtask => subtask.taskId === taskId,
     );
-    this.currentTaskIdSelected = taskId;
     this.subtasksSubject.next(subtasksFound.length ? subtasksFound : []);
+    this.currentTaskIdSelected = taskId;
   }
 
   getSubtaskById(id: number): Subtask | undefined {
@@ -79,8 +80,8 @@ export class SubtaskService implements ISubtaskService {
     this.subtasks.push(newSubtaskToAdd);
     this.subtasksSubject.next(
       this.subtasks.filter(
-        subtask => subtask.taskId === this.currentTaskIdSelected
-      )
+        subtask => subtask.taskId === this.currentTaskIdSelected,
+      ),
     );
   }
 
@@ -89,7 +90,7 @@ export class SubtaskService implements ISubtaskService {
     if (index !== -1) {
       this.subtasks[index] = subtask;
       this.subtasksSubject.next(
-        this.subtasks.filter(x => x.taskId === subtask.taskId)
+        this.subtasks.filter(x => x.taskId === subtask.taskId),
       );
       console.log(this.subtasks);
     }
@@ -97,19 +98,19 @@ export class SubtaskService implements ISubtaskService {
 
   deleteSubtask(id: number): void {
     const taskSubtasks = this.subtasks.filter(
-      subtask => subtask.taskId === this.currentTaskIdSelected
+      subtask => subtask.taskId === this.currentTaskIdSelected,
     );
     const updatedSubtasks = taskSubtasks.filter(subtask => subtask.id !== id);
 
     this.subtasks = this.subtasks.filter(
-      subtask => subtask.taskId !== this.currentTaskIdSelected
+      subtask => subtask.taskId !== this.currentTaskIdSelected,
     );
     this.subtasks.push(...updatedSubtasks);
 
     this.subtasksSubject.next(
       this.subtasks.filter(
-        subtask => subtask.taskId === this.currentTaskIdSelected
-      )
+        subtask => subtask.taskId === this.currentTaskIdSelected,
+      ),
     );
   }
 }

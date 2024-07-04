@@ -2,7 +2,9 @@
   <div class="task-list-items-container overflow-y-auto h-full">
     @for (task of tasks$ | async; track task.id) {
       <div
-        class="flex items-center p-2 hover:bg-sky-900 rounded-lg cursor-pointer"
+        class="flex items-center p-2 rounded-lg cursor-pointer"
+        [class.hover:bg-sky-900]="currentTaskSelected !== task.id"
+        [class.bg-sky-900]="currentTaskSelected === task.id"
         (click)="openTasks(task)">
         <mat-icon>{{ task.icon }}</mat-icon>
         <h2 class="ml-3 text-md font-thin">{{ task.name }}</h2>

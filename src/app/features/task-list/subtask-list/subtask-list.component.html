@@ -6,13 +6,11 @@
         @for (sub of subtareas; track sub.id) {
           <div
             class="subtask-item flex flex-row h-12 gap-5 justify-center items-center px-8">
-            @if (sub.completed) {
-              <mat-icon>check_circle_outline</mat-icon>
-            } @else {
-              <mat-icon (click)="checkSubTask(sub.id)" class="cursor-pointer"
-                >circle_outline</mat-icon
-              >
-            }
+            <mat-icon (click)="checkSubTask(sub.id)">{{
+                sub.completed ?
+                  'check_circle_outline' : 'circle_outline'
+              }}
+            </mat-icon>
             <h2 class="text-md font-medium w-28">{{ sub.title }}</h2>
             <span class="font-thin flex-1 w-full">{{ sub.description }}</span>
             <button class="ml-auto" mat-icon-button [matMenuTriggerFor]="menu">

@@ -17,20 +17,23 @@ import { take } from 'rxjs';
   styleUrl: './task-list.component.css',
 })
 export class TaskListComponent {
+  public currentTaskSelected!: number;
   private readonly taskListService = inject(TaskListService);
   public tasks$ = this.taskListService.getTaskLists();
-  private readonly taskService = inject(SubtaskService);
+  private readonly subtaskService = inject(SubtaskService);
   private readonly dialogService = inject(DialogService);
   private newTaskForm = new FormGroup({
     nombre: new FormControl<string>(
       { value: '', disabled: false },
-      Validators.required
+      Validators.required,
     ),
   });
 
   openTasks(task: TaskList) {
-    this.taskService.getSubtasksRelatedWithTask(task.id);
+    this.currentTaskSelected = task.id;
+    this.subtaskService.getSubtasksRelatedWithTask(task.id);
   }
+
 
   addNewList() {
     let dialogRef = this.dialogService.openDialog(
@@ -41,7 +44,7 @@ export class TaskListComponent {
       {
         height: '400px',
         width: '600px',
-      }
+      },
     );
     dialogRef
       .afterClosed()
