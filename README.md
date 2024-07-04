@@ -1,5 +1,3 @@
-# Delectatech
-
 Aplicación SPA realizada con Angular 18
 
 ![Image](https://miro.medium.com/v2/resize:fit:1400/1*Klh1l7wkoG6PDPb9A5oCHQ.png)
