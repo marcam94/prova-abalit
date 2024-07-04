@@ -1,0 +1,18 @@
+.navbar-container {
+  background-color: yellow !important;
+  max-height: 64px !important;
+  border-bottom: 1px solid !important;
+  padding-left: 9rem !important;
+  padding-right: 9rem !important;
+}
+
+@media (max-width: 1400px) {
+  .navbar-container {
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+  }
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
