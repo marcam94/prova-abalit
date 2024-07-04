@@ -1,27 +1,67 @@
-# ProvaAbalit
+# Delectatech
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
+Aplicación SPA realizada con Angular 18
 
-## Development server
+![Image](https://miro.medium.com/v2/resize:fit:1400/1*Klh1l7wkoG6PDPb9A5oCHQ.png)
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Description
 
-## Code scaffolding
+Aplicación SPA que permite organizar tareas, creando, editando y eliminando. También se puede crear listas
+y clasificar por categorias las tareas y sus subtareas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Realizado con:
 
-## Build
+- Angular 18
+- RXJS
+- Angular Material 3
+- Tailwind
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Requirements
 
-## Running unit tests
+- [Node.js](https://nodejs.org/en/) installed on your system.
+- [Angular CLI](https://angular.io/cli) installed globally.
+- [npm](https://www.npmjs.com) installed globally.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Run Locally
 
-## Running end-to-end tests
+Clone the project
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+```bash
+git clone https://github.com/marcam94/prova-abalit
+```
 
-## Further help
+Go to the project directory
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+```bash
+cd my-project
+```
+
+Install dependencies
+
+```bash
+npm install
+```
+
+Start the server
+
+```bash
+ng serve
+```
+
+Run tests
+
+```bash
+ng test
+```
+
+_Check package.json to run scripts_
+
+```
+
+## Features
+
+- Crear listas de tareas
+- Las tareas tienen sus subtareas
+- Estas subtareas se pueden editar, eliminar, consultar detalle y marcar como realizada o no.
+
+

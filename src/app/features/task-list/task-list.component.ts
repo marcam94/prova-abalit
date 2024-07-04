@@ -52,7 +52,7 @@ export class TaskListComponent {
       .subscribe((resp: { nombre: string }) => {
         if (resp) {
           const newList: TaskList = {
-            id: 20,
+            id: Math.random() * 999,
             name: resp.nombre,
             subtasks: [],
             icon: 'menu',
