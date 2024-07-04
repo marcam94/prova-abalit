@@ -1,16 +1,20 @@
 <section class="h-full px-24 pb-6 pt-16">
   @if (subTasks$ | async; as subtareas) {
     <div class="flex flex-col gap-5 h-full">
-      <div class="subtask-list-container flex flex-col gap-1 h-full overflow-y-auto ">
+      <div
+        class="subtask-list-container flex flex-col gap-1 h-full overflow-y-auto">
         @for (sub of subtareas; track sub.id) {
-          <div class="subtask-item flex flex-row h-12 gap-5 justify-center items-center px-8">
+          <div
+            class="subtask-item flex flex-row h-12 gap-5 justify-center items-center px-8">
             @if (sub.completed) {
               <mat-icon>check_circle_outline</mat-icon>
             } @else {
-              <mat-icon (click)="checkSubTask(sub.id)" class="cursor-pointer">circle_outline</mat-icon>
+              <mat-icon (click)="checkSubTask(sub.id)" class="cursor-pointer"
+                >circle_outline</mat-icon
+              >
             }
-            <h2 class=" text-md font-medium w-28">{{ sub.title }}</h2>
-            <span class="font-thin  flex-1 w-full">{{ sub.description }}</span>
+            <h2 class="text-md font-medium w-28">{{ sub.title }}</h2>
+            <span class="font-thin flex-1 w-full">{{ sub.description }}</span>
             <button class="ml-auto" mat-icon-button [matMenuTriggerFor]="menu">
               <mat-icon [color]="'primary'">more_vert</mat-icon>
             </button>
@@ -31,16 +35,12 @@
           </div>
         }
       </div>
-      <div class="subtask-item mt-auto flex flex-row h-12 gap-5 justify-start items-center
-       px-8 cursor-pointer text-sky-400" (click)="createSubTask()"
-      >
+      <div
+        class="subtask-item mt-auto flex flex-row h-12 gap-5 justify-start items-center px-8 cursor-pointer text-sky-400"
+        (click)="createSubTask()">
         <mat-icon>add</mat-icon>
         <span>Asignar una tarea</span>
       </div>
     </div>
-
   }
 </section>
-
-
-

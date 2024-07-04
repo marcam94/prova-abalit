@@ -1,21 +1,21 @@
 <h2 class="m-auto" mat-dialog-title>{{ title }}</h2>
 <mat-dialog-content>
   @if (formGroup) {
-    <app-dynamic-form
-      [fGroup]="formGroup"
-    ></app-dynamic-form>
+    <app-dynamic-form [fGroup]="formGroup"></app-dynamic-form>
   } @else if (data.inputData) {
-    <app-task-detail [subtask]="data.inputData">
-
-    </app-task-detail>
-
+    <app-task-detail [subtask]="data.inputData"> </app-task-detail>
   } @else {
     <h2>No hay contenido</h2>
   }
 </mat-dialog-content>
 <mat-dialog-actions>
   <button (click)="dialog.close()" mat-button>Cerrar</button>
-  <button (click)="sendValues()" *ngIf="!data.readonly" [color]="'primary'" [disabled]="formGroup.invalid"
-          mat-flat-button>Enviar
+  <button
+    (click)="sendValues()"
+    *ngIf="!data.readonly"
+    [color]="'primary'"
+    [disabled]="formGroup.invalid"
+    mat-flat-button>
+    Enviar
   </button>
 </mat-dialog-actions>

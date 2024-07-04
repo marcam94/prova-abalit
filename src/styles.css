@@ -3,7 +3,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body {
+html,
+body {
   height: 100%;
   background-color: #202020;
   color: #e1e1e1;
@@ -11,10 +12,9 @@ html, body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
 .mdc-notched-outline__notch {
   border-right: none !important;
 }
-

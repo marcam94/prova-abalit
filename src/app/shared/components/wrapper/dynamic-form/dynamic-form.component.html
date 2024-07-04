@@ -2,7 +2,7 @@
   @for (controlName of getControlNames(); track controlName) {
     <mat-form-field appearance="outline" class="w-full">
       <mat-label>{{ controlName | titlecase }}</mat-label>
-      <input matInput [formControlName]="controlName">
+      <input matInput [formControlName]="controlName" />
       @if (fGroup.get(controlName)?.hasError('required')) {
         <mat-error>Campo obligatorio</mat-error>
       }

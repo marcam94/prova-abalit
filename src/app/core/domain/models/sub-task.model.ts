@@ -6,5 +6,5 @@ export interface Subtask {
   completed: boolean;
   taskId: number;
   doneAt?: Date | null;
-  updateAt?: Date | null
+  updateAt?: Date | null;
 }

@@ -1,15 +1,18 @@
 <section class="flex flex-col gap-4 h-full">
   <div class="task-list-items-container overflow-y-auto h-full">
     @for (task of tasks$ | async; track task.id) {
-      <div class="flex items-center p-2 hover:bg-sky-900 rounded-lg cursor-pointer" (click)="openTasks(task)">
+      <div
+        class="flex items-center p-2 hover:bg-sky-900 rounded-lg cursor-pointer"
+        (click)="openTasks(task)">
         <mat-icon>{{ task.icon }}</mat-icon>
         <h2 class="ml-3 text-md font-thin">{{ task.name }}</h2>
       </div>
     }
   </div>
-  <div (click)="addNewList()" class="mt-auto cursor-pointer mb-6 flex flex-row gap-5 hover:bg-sky-900 rounded-lg">
+  <div
+    (click)="addNewList()"
+    class="mt-auto cursor-pointer mb-6 flex flex-row gap-5 hover:bg-sky-900 rounded-lg">
     <mat-icon>add</mat-icon>
     <span>Nueva lista</span>
   </div>
 </section>
-

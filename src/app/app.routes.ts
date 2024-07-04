@@ -1,9 +1,11 @@
-import {Routes} from '@angular/router';
-import {LayoutComponent} from "./shared/components/layout/layout.component";
+import { Routes } from '@angular/router';
+import { LayoutComponent } from './shared/components/layout/layout.component';
 
 export const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'tareas'
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'tareas',
   },
   {
     path: '',
@@ -11,9 +13,11 @@ export const routes: Routes = [
     children: [
       {
         path: 'tareas',
-        loadComponent: () => import('./features/task-list/subtask-list/subtask-list.component')
-          .then(x => x.SubtaskListComponent)
-      }
-    ]
-  }
+        loadComponent: () =>
+          import(
+            './features/task-list/subtask-list/subtask-list.component'
+          ).then(x => x.SubtaskListComponent),
+      },
+    ],
+  },
 ];
